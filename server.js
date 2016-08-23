@@ -77,12 +77,13 @@ app.post('/api/recipes', function(req, res) {
     // NOTE: In a real implementation, we would likely rely on a database or
     // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
     // treat Date.now() as unique-enough for our purposes.
-    var newComment = {
+    var newRecipe = {
       id: Date.now(),
-      author: req.body.author,
-      text: req.body.text,
+      name: req.body.name,
+      category: req.body.category,
+      ingredients: []
     };
-    recipes.push(newComment);
+    recipes.push(newRecipe);
     fs.writeFile(RECIPES_FILE, JSON.stringify(recipes, null, 4), function(err) {
       if (err) {
         console.error(err);

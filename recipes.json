@@ -54,17 +54,36 @@
                 "unit": "tablespoon"
             },
             {
-                "name": "",
+                "name": "carrots",
                 "quantity": 4,
-                "unit": ""
+                "unit": "cups"
+            },
+            {
+                "name": "chicken broth",
+                "quantity": 3,
+                "unit": "cups"
+            },
+            {
+                "name": "garlic",
+                "quantity": 4,
+                "unit": "cloves"
+            },
+            {
+                "name": "dried thyme",
+                "quantity": 1,
+                "unit": "teaspoon"
+            },
+            {
+                "name": "tarragon",
+                "quantity": 0.5,
+                "unit": "teaspoon"
             }
         ],
         "method": [
-            ". ",
-            ". ",
-            ". ",
-            ". ",
-            ". "
+            "Combine carrots, chicken broth, and onion in a large pot. Pour enough water into the pot to assure the ingredients are covered; add garlic, thyme, and tarragon. ",
+            "Bring the liquid to a boil, reduce heat to medium-low, place a cover on the pot, and simmer the mixture until the carrots are very tender, 40 to 50 minutes. ",
+            "Remove pot from heat and cool soup for 10 minutes. Puree soup with an immersion blender or mash vegetables with a potato masher and whisk the soup until smooth. ",
+            "Return pot to medium heat and cook until reheated, about 5 minutes. Stir cream through the soup. "
         ]
     },
     {
@@ -85,5 +104,17 @@
                 "unit": ""
             }
         ]
+    },
+    {
+        "id": 1471983969133,
+        "name": "qweqweewq",
+        "category": "dinner",
+        "ingredients": []
+    },
+    {
+        "id": 1471984022418,
+        "name": "2113123221332",
+        "category": "asian",
+        "ingredients": []
     }
 ]
