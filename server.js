@@ -16,7 +16,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
+var RECIPES_FILE = path.join(__dirname, 'recipes.json');
+var UNITS_FILE = path.join(__dirname, 'units.json');
+var CATEGORIES_FILE = path.join(__dirname, 'categories.json');
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -30,13 +32,13 @@ app.use(function(req, res, next) {
     // an API server in conjunction with something like webpack-dev-server.
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Disable caching so we'll always get the latest comments.
+    // Disable caching so we'll always get the latest recipes.
     res.setHeader('Cache-Control', 'no-cache');
     next();
 });
 
-app.get('/api/comments', function(req, res) {
-  fs.readFile(COMMENTS_FILE, function(err, data) {
+app.get('/api/recipes', function(req, res) {
+  fs.readFile(RECIPES_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
@@ -45,13 +47,33 @@ app.get('/api/comments', function(req, res) {
   });
 });
 
-app.post('/api/comments', function(req, res) {
-  fs.readFile(COMMENTS_FILE, function(err, data) {
+app.get('/api/units', function(req, res) {
+  fs.readFile(UNITS_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
-    var comments = JSON.parse(data);
+    res.json(JSON.parse(data));
+  });
+});
+
+app.get('/api/categories', function(req, res) {
+  fs.readFile(CATEGORIES_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    res.json(JSON.parse(data));
+  });
+});
+
+app.post('/api/recipes', function(req, res) {
+  fs.readFile(RECIPES_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var recipes = JSON.parse(data);
     // NOTE: In a real implementation, we would likely rely on a database or
     // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
     // treat Date.now() as unique-enough for our purposes.
@@ -60,13 +82,13 @@ app.post('/api/comments', function(req, res) {
       author: req.body.author,
       text: req.body.text,
     };
-    comments.push(newComment);
-    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
+    recipes.push(newComment);
+    fs.writeFile(RECIPES_FILE, JSON.stringify(recipes, null, 4), function(err) {
       if (err) {
         console.error(err);
         process.exit(1);
       }
-      res.json(comments);
+      res.json(recipes);
     });
   });
 });

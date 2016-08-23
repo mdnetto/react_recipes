@@ -1,0 +1,16 @@
+[
+    {
+        "cup": {
+            "singular" : "cup",
+            "plural": "cups"
+        },
+        "tablespoon": {
+            "singular" : "tablespoon",
+            "plural": "tablespoons"
+        },
+        "teaspoon": {
+            "singular" : "teaspoon",
+            "plural": "teaspoons"
+        }
+    }
+]
