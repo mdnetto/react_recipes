@@ -46,7 +46,7 @@ var RecipeBox = React.createClass({ // eslint-disable-line no-undef
 
 var RecipeList = React.createClass({// eslint-disable-line no-undef
   render: function () {
-    var recipes = _.orderBy(this.props.data, ['id'], ['desc']);
+    var recipes = _.orderBy(this.props.data, ['id'], ['desc'])// eslint-disable-line no-undef
     var recipeNodes = recipes.map(function (recipe) {
       return (
         <Recipe
@@ -107,7 +107,6 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
   handleSubmit: function (e) {
     e.preventDefault()
     var name = this.state.name.trim()
-    //var ingredients = this.state.ingredients.trim()
     var category = this.state.category.trim()
     if (!name || !category) {
       return
