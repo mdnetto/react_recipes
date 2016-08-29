@@ -87,34 +87,33 @@
         ]
     },
     {
-        "id": 1462223304556,
-        "name": "",
-        "category": [
-            ""
-        ],
+        "id": 1472500218280,
+        "name": "duck doup",
+        "category": "dessert",
         "ingredients": [
             {
-                "name": "",
-                "quantity": 2,
-                "unit": ""
-            },
-            {
-                "name": "",
-                "quantity": 2,
-                "unit": ""
+                "name": "duck"
             }
         ]
     },
     {
-        "id": 1471983969133,
-        "name": "qweqweewq",
+        "id": 1472501103780,
+        "name": "asdf",
         "category": "dinner",
-        "ingredients": []
+        "ingredients": [
+            {
+                "name": "asdfasdfasdfasdf"
+            }
+        ]
     },
     {
-        "id": 1471984022418,
-        "name": "2113123221332",
-        "category": "asian",
-        "ingredients": []
+        "id": 1472501219000,
+        "name": "asdfasfd",
+        "category": "dinner",
+        "ingredients": [
+            {
+                "name": "asdfasdfasdfasdf"
+            }
+        ]
     }
 ]

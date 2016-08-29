@@ -95,7 +95,7 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
     })
   },
   getInitialState: function () {
-    return {name: '', category: '', ingredients: ''}
+    return {name: '', category: '', ingredients: []} 
   },
   componentWillMount: function () {
     this.loadUnitsFromServer()
@@ -108,11 +108,14 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
     e.preventDefault()
     var name = this.state.name.trim()
     var category = this.state.category.trim()
-    if (!name || !category) {
+    var ingredientName = this.state.ingredients.trim()
+	  console.log(this.state);
+    if (!name || !category || !ingredientName) {
       return
     }
-    this.props.onRecipeSubmit({name: name, category: category})
-    this.setState({name: '', category: ''})
+	  
+    this.props.onRecipeSubmit({name: name, category: category, ingredients: ingredientName}) 
+    this.setState({name: '', category: '', ingredients: []}) 
   },
   renderCategories: function () {
     if (this.state.categories) {
@@ -141,13 +144,17 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
           this.renderCategories()
           }
         </select>
+		<br></br>
+		<br></br>
         <input
           name='ingredients'
           type='text'
-          placeholder='Ingredients'
+          placeholder='IngredientName'
           value={this.state.ingredients}
           onChange={this.handleTextChange}
         />
+		<br></br>
+		<br></br>
         <input type='submit' value='Post' />
       </form>
     )
