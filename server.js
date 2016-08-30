@@ -81,7 +81,7 @@ app.post('/api/recipes', function(req, res) {
       id: Date.now(),
       name: req.body.name,
       category: req.body.category,
-      ingredients: [{name: req.body.ingredients}] 
+      ingredients: req.body.ingredients
     };
     recipes.push(newRecipe);
     fs.writeFile(RECIPES_FILE, JSON.stringify(recipes, null, 4), function(err) {

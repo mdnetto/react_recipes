@@ -1,3 +1,33 @@
+var RecipeIngredients = React.createClass({
+	addIngredient: function(e) {
+		if (e.keyCode == 13) {
+			e.preventDefault() //prevent it from doign it's own thing
+		    this.props.onIngredientAdd({name: e.target.value, quantity: '', unit: '' });
+			e.target.value=''
+		}
+  },
+  render: function () {
+    return (
+      <div className='recipeIngredients'>
+        <h1>Ingredients</h1>
+			{this.props.ingredients.map(function(ingredient, i) {
+			    return(
+					<input
+						type='text'
+						value={ingredient.name}
+						key={i}
+					/>
+			   )})
+		    }
+			<input id="toAdd"
+				type='text'
+				onKeyDown={this.addIngredient}
+			 />
+      </div>
+    )
+  }
+})	
+
 var RecipeBox = React.createClass({ // eslint-disable-line no-undef
   loadRecipesFromServer: function () {
     $.ajax({ // eslint-disable-line no-undef
@@ -104,17 +134,21 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
   handleTextChange: function (e) {
     this.setState({[e.target.name]: e.target.value})
   },
+  handleIngredientAdd: function(ingredient) {
+		var ingredients = this.state.ingredients;
+		ingredients.push(ingredient);
+		this.setState({ingredients:  ingredients});
+  },
   handleSubmit: function (e) {
     e.preventDefault()
     var name = this.state.name.trim()
     var category = this.state.category.trim()
-    var ingredientName = this.state.ingredients.trim()
-	  console.log(this.state);
-    if (!name || !category || !ingredientName) {
+    var ingredients = this.state.ingredients
+    if (!name || !category || !ingredients) {
       return
     }
 	  
-    this.props.onRecipeSubmit({name: name, category: category, ingredients: ingredientName}) 
+    this.props.onRecipeSubmit({name: name, category: category, ingredients: ingredients}) 
     this.setState({name: '', category: '', ingredients: []}) 
   },
   renderCategories: function () {
@@ -144,15 +178,7 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
           this.renderCategories()
           }
         </select>
-		<br></br>
-		<br></br>
-        <input
-          name='ingredients'
-          type='text'
-          placeholder='IngredientName'
-          value={this.state.ingredients}
-          onChange={this.handleTextChange}
-        />
+				<RecipeIngredients ingredients={this.state.ingredients} onIngredientAdd={this.handleIngredientAdd} />
 		<br></br>
 		<br></br>
         <input type='submit' value='Post' />
