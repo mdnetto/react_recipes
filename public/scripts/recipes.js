@@ -1,28 +1,27 @@
 var RecipeIngredients = React.createClass({
-	addIngredient: function(e) {
+  initialiseIngredientOnEnter: function(e) {
 		if (e.keyCode == 13) {
 			e.preventDefault() //prevent it from doign it's own thing
-		    this.props.onIngredientAdd({name: e.target.value, quantity: '', unit: '' });
-			e.target.value=''
+		    this.props.initialiseIngredient();
 		}
   },
   render: function () {
+	var that = this;
     return (
       <div className='recipeIngredients'>
         <h1>Ingredients</h1>
 			{this.props.ingredients.map(function(ingredient, i) {
 			    return(
-					<p><input
+					<p key={i}>
+						<input autoFocus
 						type='text'
 						value={ingredient.name}
-						key={i}/>
+					    onChange={function(e) {that.props.handleIngredientNameEdit(e.target.value, i)}}
+					    onKeyDown={that.initialiseIngredientOnEnter}
+						/>
 					</p>
 			   )})
 		    }
-			<input id="toAdd"
-				type='text'
-				onKeyDown={this.addIngredient}
-			 />
       </div>
     )
   }
@@ -126,7 +125,7 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
     })
   },
   getInitialState: function () {
-    return {name: '', category: '', ingredients: []} 
+    return {name: '', category: '', ingredients: [{name: '', unit: '', quantity: ''}]} 
   },
   componentWillMount: function () {
     this.loadUnitsFromServer()
@@ -135,10 +134,15 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
   handleTextChange: function (e) {
     this.setState({[e.target.name]: e.target.value})
   },
-  handleIngredientAdd: function(ingredient) {
+  initialiseIngredient: function() {
 		var ingredients = this.state.ingredients;
-		ingredients.push(ingredient);
+		ingredients.push({name: '', quantity: '', unit: ''});
 		this.setState({ingredients:  ingredients});
+  },
+  handleIngredientNameEdit: function(name, i) {
+	  var ingredients = this.state.ingredients;
+	  ingredients[i].name = name;
+	  this.setState({ingredients:  ingredients});
   },
   handleSubmit: function (e) {
     e.preventDefault()
@@ -150,7 +154,7 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
     }
 	  
     this.props.onRecipeSubmit({name: name, category: category, ingredients: ingredients}) 
-    this.setState({name: '', category: '', ingredients: []}) 
+    this.setState(this.getInitialState()) 
   },
   renderCategories: function () {
     if (this.state.categories) {
@@ -176,7 +180,7 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
 		  <option>Select a category</option>
           {this.renderCategories()}
         </select>
-		<RecipeIngredients ingredients={this.state.ingredients} onIngredientAdd={this.handleIngredientAdd} />
+		<RecipeIngredients ingredients={this.state.ingredients} initialiseIngredient={this.initialiseIngredient} handleIngredientNameEdit={this.handleIngredientNameEdit} />
 		<br></br>
 		<br></br>
         <input type='submit' value='Post' />
