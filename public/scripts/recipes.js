@@ -12,11 +12,11 @@ var RecipeIngredients = React.createClass({
         <h1>Ingredients</h1>
 			{this.props.ingredients.map(function(ingredient, i) {
 			    return(
-					<input
+					<p><input
 						type='text'
 						value={ingredient.name}
-						key={i}
-					/>
+						key={i}/>
+					</p>
 			   )})
 		    }
 			<input id="toAdd"
@@ -80,6 +80,7 @@ var RecipeList = React.createClass({// eslint-disable-line no-undef
     var recipeNodes = recipes.map(function (recipe) {
       return (
         <Recipe
+		  image={recipe.image}
           name={recipe.name}
           key={recipe.id}
           category={recipe.category}
@@ -166,19 +167,16 @@ var RecipeForm = React.createClass({// eslint-disable-line no-undef
           type='text'
           placeholder='Recipe name'
           value={this.state.name}
-          onChange={this.handleTextChange}
-        />
+          onChange={this.handleTextChange}/>
         <select
           name='category'
           placeholder='Select a category'
           value={this.state.category}
-          onChange={this.handleTextChange}
-        >
-          {
-          this.renderCategories()
-          }
+          onChange={this.handleTextChange}>
+		  <option>Select a category</option>
+          {this.renderCategories()}
         </select>
-				<RecipeIngredients ingredients={this.state.ingredients} onIngredientAdd={this.handleIngredientAdd} />
+		<RecipeIngredients ingredients={this.state.ingredients} onIngredientAdd={this.handleIngredientAdd} />
 		<br></br>
 		<br></br>
         <input type='submit' value='Post' />
@@ -191,7 +189,7 @@ var Recipe = React.createClass({// eslint-disable-line no-undef
   render: function () {
     return (
       <div className='recipe'>
-        <h2 className='recipeName'>
+        <h2 className='recipeName' style={recipeHeading}>
           {this.props.name}
         </h2>
         <p className='recipeCategory'>
@@ -207,6 +205,10 @@ var Recipe = React.createClass({// eslint-disable-line no-undef
     )
   }
 })
+
+var recipeHeading = {
+	color: '#657b83'
+};
 
 ReactDOM.render(// eslint-disable-line no-undef
   <RecipeBox recipes_url='api/recipes' pollInterval={2000} />,
