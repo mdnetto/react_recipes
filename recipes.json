@@ -85,5 +85,32 @@
             "Remove pot from heat and cool soup for 10 minutes. Puree soup with an immersion blender or mash vegetables with a potato masher and whisk the soup until smooth. ",
             "Return pot to medium heat and cook until reheated, about 5 minutes. Stir cream through the soup. "
         ]
+    },
+    {
+        "id": 1472651833622,
+        "name": "pea soup",
+        "category": "dessert",
+        "ingredients": [
+            {
+                "name": "2 cups peas, 5 cups water",
+                "quantity": "",
+                "unit": ""
+            },
+            {
+                "name": "5 cups of water",
+                "quantity": "",
+                "unit": ""
+            },
+            {
+                "name": "alskdfjlasdf",
+                "quantity": "",
+                "unit": ""
+            },
+            {
+                "name": "alsdkfjalskdf",
+                "quantity": "",
+                "unit": ""
+            }
+        ]
     }
 ]
