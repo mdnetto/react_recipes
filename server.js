@@ -16,9 +16,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var RECIPES_FILE = path.join(__dirname, 'recipes.json');
-var UNITS_FILE = path.join(__dirname, 'units.json');
-var CATEGORIES_FILE = path.join(__dirname, 'categories.json');
+var RECIPES_FILE = path.join(__dirname, '/json/recipes.json');
+var UNITS_FILE = path.join(__dirname, '/json/units.json');
+var CATEGORIES_FILE = path.join(__dirname, '/json/categories.json');
 
 app.set('port', (process.env.PORT || 3000));
 
